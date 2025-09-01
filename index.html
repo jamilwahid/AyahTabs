@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AyahTabs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Crimson+Pro:wght@400;600&family=EB+Garamond&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f4e8dc;
+      --text-color: #1b1b1b;
+      --text-muted: #7a6e65;
+      --arabic-color: #8d6b42;
+      --spacing-base: 1rem;
+      --spacing-large: 2.5rem;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'EB Garamond', serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding-top: 15vh;
+      overflow-y: hidden;
+      position: relative;
+    }
+
+    .ayah-arabic {
+      font-family: 'Amiri', serif;
+      font-size: 2.75rem;
+      line-height: 1.8;
+      margin-bottom: var(--spacing-base);
+      color: var(--arabic-color);
+      padding: 0 var(--spacing-base);
+      max-width: 90vw;
+    }
+
+    .translation {
+      font-size: 1.85rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-base);
+      color: var(--text-color);
+      padding: 0 var(--spacing-base);
+      max-width: 90vw;
+    }
+
+    .reference {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: var(--spacing-large);
+    }
+
+    .tafsir {
+      max-width: min(800px, 90vw);
+      font-size: 1.35rem;
+      font-family: 'Crimson Pro', serif;
+      line-height: 2;
+      padding: 0 var(--spacing-base);
+      color: var(--text-color);
+    }
+
+    .footer-signature {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      color: var(--arabic-color);
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-signature:hover {
+      opacity: 1;
+    }
+
+    .footer-signature span {
+      font-style: italic;
+      font-family: 'Crimson Pro', serif;
+    }
+
+    .footer-signature .emoji {
+      font-style: normal;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .ayah-arabic {
+        font-size: 2rem;
+      }
+      .translation {
+        font-size: 1.5rem;
+      }
+      .tafsir {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="ayahArabic" class="ayah-arabic"></div>
+  <div id="ayahTranslation" class="translation"></div>
+  <div id="ayahReference" class="reference"></div>
+  <div id="ayahTafsir" class="tafsir"></div>
+  <div class="footer-signature">
+    <span class="emoji">✊🇵🇸</span>
+    <span>Since 1948 — the ummah remembers!</span>
+    <span class="emoji">🍉</span>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
