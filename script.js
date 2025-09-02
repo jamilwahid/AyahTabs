@@ -1,4 +1,33 @@
 document.addEventListener("DOMContentLoaded", async function () {
+  // Theme switching functionality
+  function initThemeSwitcher() {
+    const themeSwitcher = document.querySelector('.theme-switcher');
+    const themeIcon = document.querySelector('.theme-icon');
+    const root = document.documentElement;
+    
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    root.setAttribute('data-theme', savedTheme);
+    updateThemeSwitcher(savedTheme);
+    
+    themeSwitcher.addEventListener('click', () => {
+      const currentTheme = root.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeSwitcher(newTheme);
+    });
+  }
+  
+  function updateThemeSwitcher(theme) {
+    const themeSwitcher = document.querySelector('.theme-switcher');
+    const themeIcon = document.querySelector('.theme-icon');
+    
+    themeSwitcher.setAttribute('data-theme', theme);
+    themeIcon.className = `theme-icon fas ${theme === 'dark' ? 'fa-moon' : 'fa-sun'}`;
+  }
+
   // Function to fetch ayah data from JSON file
   async function fetchAyahData() {
     try {
@@ -58,7 +87,15 @@ document.addEventListener("DOMContentLoaded", async function () {
   function updateUI(data) {
     document.getElementById('ayahArabic').innerText = data.ayah.arabic;
     document.getElementById('ayahTranslation').innerText = `"${data.ayah.translation}"`;
-    document.getElementById('ayahReference').innerText = `[${data.ayah.reference}]`;
+    
+    // Make reference clickable if URL exists
+    const referenceElement = document.getElementById('ayahReference');
+    if (data.ayah.url) {
+      referenceElement.innerHTML = `<a href="${data.ayah.url}" target="_blank" class="reference-link">[${data.ayah.reference}]</a>`;
+    } else {
+      referenceElement.innerText = `[${data.ayah.reference}]`;
+    }
+    
     document.getElementById('ayahTafsir').innerText = data.tafsir;
   }
 
@@ -66,8 +103,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     const ayahData = await fetchAyahData();
     const ayah = await getNextAyah(ayahData);
     updateUI(ayah);
+    initThemeSwitcher(); // Initialize theme switcher
   } catch (error) {
     console.error('Error displaying ayah:', error);
     updateUI(fallbackAyahData[0]);
+    initThemeSwitcher(); // Initialize theme switcher even on error
   }
 });

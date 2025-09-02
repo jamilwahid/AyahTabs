@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Crimson+Pro:wght@400;600&family=EB+Garamond&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --bg-color: #f4e8dc;
@@ -15,6 +16,65 @@
       --arabic-color: #8d6b42;
       --spacing-base: 1rem;
       --spacing-large: 2.5rem;
+    }
+
+    :root[data-theme="dark"] {
+      --bg-color: #1a1a1a;
+      --text-color: #e8e8e8;
+      --text-muted: #a0a0a0;
+      --arabic-color: #d4af37;
+    }
+
+    .theme-switcher {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--arabic-color);
+      border: none;
+      border-radius: 25px;
+      width: 60px;
+      height: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 2px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .theme-switcher:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .theme-icon {
+      position: absolute;
+      left: 6px;
+      font-size: 12px;
+      color: var(--bg-color);
+      transition: all 0.3s ease;
+      z-index: 2;
+      width: 16px;
+      text-align: center;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      right: 2px;
+      width: 26px;
+      height: 26px;
+      background: var(--bg-color);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    .theme-switcher[data-theme="dark"] .theme-toggle {
+      right: 32px;
+    }
+
+    .theme-switcher[data-theme="dark"] .theme-icon {
+      left: 40px;
     }
 
     body {
@@ -58,6 +118,27 @@
       font-style: italic;
       color: var(--text-muted);
       margin-bottom: var(--spacing-large);
+    }
+
+    .reference-link {
+      color: var(--arabic-color);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background-color: rgba(141, 107, 66, 0.1);
+      border: 1px solid rgba(141, 107, 66, 0.2);
+      display: inline-block;
+    }
+
+    .reference-link:hover {
+      color: var(--text-color);
+      text-decoration: underline;
+      background-color: rgba(141, 107, 66, 0.2);
+      border-color: rgba(141, 107, 66, 0.4);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .tafsir {
@@ -111,6 +192,10 @@
   </style>
 </head>
 <body>
+  <div class="theme-switcher" data-theme="light">
+    <i class="theme-icon fas fa-sun"></i>
+    <div class="theme-toggle"></div>
+  </div>
   <div id="ayahArabic" class="ayah-arabic"></div>
   <div id="ayahTranslation" class="translation"></div>
   <div id="ayahReference" class="reference"></div>
