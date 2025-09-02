@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "AyahTabs",
-  "version": "2.0",
+  "name": "AyahTabs — Quran Ayah & Reflection on New Tab",
+  "version": "2.1",
   "description": "A Quranic verse and tafsir every time you open a tab — reflection for the modern Muslim.",
   "chrome_url_overrides": {
     "newtab": "index.html"
